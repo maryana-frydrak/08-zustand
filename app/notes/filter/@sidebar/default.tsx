@@ -5,6 +5,7 @@ export default function Default() {
   const tags = ["All notes", "Todo", "Work", "Personal", "Meeting", "Shopping"];
   return (
     <nav>
+      <Link href="/notes/action/create">Create note</Link>
       <ul className={css.menuList}>
         {tags.map((tag) => (
           <li key={tag} className={css.menuItem}>

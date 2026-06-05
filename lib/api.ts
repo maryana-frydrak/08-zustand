@@ -33,9 +33,11 @@ export const deleteNote = async (id: string): Promise<Note> => {
   return res.data;
 };
 
-export const createNote = async (
-  note: Omit<Note, "id" | "createdAt" | "updatedAt">,
-) => {
+export const createNote = async (note: {
+  title: string;
+  content: string;
+  tag: string;
+}) => {
   const res = await axios.post<Note>(`${BASE_URL}/notes`, note, {
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
