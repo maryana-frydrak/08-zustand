@@ -8,7 +8,11 @@ import { createNote } from "@/lib/api";
 import { useNoteStore } from "@/lib/store/noteStore";
 import css from "./NoteForm.module.css";
 
-export default function NoteForm() {
+interface NoteFormProps {
+  onClose?: () => void;
+}
+
+export default function NoteForm({ onClose }: NoteFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { draft, setDraft, clearDraft } = useNoteStore();
@@ -38,6 +42,10 @@ export default function NoteForm() {
     };
 
     mutation.mutate(values);
+  };
+
+  const handleCancel = () => {
+    router.back();
   };
 
   const handleInputChange = (
@@ -79,6 +87,17 @@ export default function NoteForm() {
         <option value="Shopping">Shopping</option>
         <option value="Todo">Todo</option>
       </select>
+
+      <button
+        type="button"
+        onClick={() => {
+          handleCancel();
+          if (onClose) onClose();
+        }}
+        className={css.button}
+      >
+        Cancel
+      </button>
 
       <button
         className={css.button}
