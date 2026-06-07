@@ -16,7 +16,6 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -31,7 +30,7 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
   };
 
   const { data } = useQuery({
-    queryKey: ["notes", tag, page, debouncedSearch],
+    queryKey: ["notes", page, tag, debouncedSearch],
     queryFn: () => fetchNotes(page, 10, tag ?? "", debouncedSearch),
   });
   if (!data || !data.notes) {
