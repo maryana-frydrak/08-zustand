@@ -1,12 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { JSX, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
 import { SearchBox } from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
 
 interface NotesClientProps {
@@ -17,7 +16,7 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -53,12 +52,8 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
         }
         pageCount={data?.totalPages || 1}
       />
-      <button onClick={() => setIsModalOpen(true)}>Add New Note</button>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <NoteForm onClose={() => setIsModalOpen(false)} />
-        </Modal>
-      )}
+
+      <Link href="/notes/action/create">Add New Note</Link>
     </div>
   );
 }
