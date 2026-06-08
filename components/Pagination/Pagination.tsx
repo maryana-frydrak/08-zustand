@@ -7,13 +7,13 @@ const ReactPaginate =
   ReactPaginateModule as unknown as ComponentType<ReactPaginateProps>;
 
 interface PaginationProps {
-  pageCount: number;
+  pageCount?: number;
   currentPage: number;
   onPageChange: (selectedItem: { selected: number }) => void;
 }
 
 const Pagination = ({
-  pageCount,
+  pageCount = 1,
   currentPage,
   onPageChange,
 }: PaginationProps) => {

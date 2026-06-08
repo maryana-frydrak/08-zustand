@@ -31,14 +31,14 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
 
   const { data } = useQuery({
     queryKey: ["notes", page, tag, debouncedSearch],
-    queryFn: () => fetchNotes(page, 10, tag, debouncedSearch ?? ""),
+    queryFn: () => fetchNotes(page, 10, tag || "", debouncedSearch),
   });
   if (!data || !data.notes) {
     return <div>Loading...</div>;
   }
   return (
     <div className="notes-container">
-      <SearchBox onChange={handleSearchChange} />
+      <SearchBox value={debouncedSearch} onChange={handleSearchChange} />
       {data?.notes && data.notes.length > 0 ? (
         <NoteList notes={data.notes} />
       ) : (
