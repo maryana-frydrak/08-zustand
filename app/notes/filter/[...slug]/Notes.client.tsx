@@ -38,7 +38,7 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
   }
   return (
     <div className="notes-container">
-      <SearchBox value={debouncedSearch} onChange={handleSearchChange} />
+      <SearchBox value={search} onChange={handleSearchChange} />
       {data?.notes && data.notes.length > 0 ? (
         <NoteList notes={data.notes} />
       ) : (
