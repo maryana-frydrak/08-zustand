@@ -31,7 +31,7 @@ export default function NotesClient({ tag }: NotesClientProps): JSX.Element {
 
   const { data } = useQuery({
     queryKey: ["notes", page, tag, debouncedSearch],
-    queryFn: () => fetchNotes(page, 10, tag || "", debouncedSearch),
+    queryFn: () => fetchNotes(page, 10, tag, debouncedSearch),
   });
   if (!data || !data.notes) {
     return <div>Loading...</div>;
